@@ -44,6 +44,9 @@ if(PNG_FOUND)
     set(HAVE_LIBPNG TRUE)
 endif()
 
+# Check for liboplhw
+find_package(OplHW)
+
 find_package(m)
 
 include(CheckSymbolExists)

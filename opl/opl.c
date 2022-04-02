@@ -38,9 +38,11 @@ extern opl_driver_t opl_openbsd_driver;
 extern opl_driver_t opl_win32_driver;
 #endif
 extern opl_driver_t opl_sdl_driver;
+extern opl_driver_t opl_liboplhw_driver;
 
 static opl_driver_t *drivers[] =
 {
+    &opl_liboplhw_driver,
 #if (defined(__i386__) || defined(__x86_64__)) && defined(HAVE_IOPERM)
     &opl_linux_driver,
 #endif
@@ -86,7 +88,7 @@ static opl_init_result_t InitDriver(opl_driver_t *_driver,
     driver = _driver;
     init_stage_reg_writes = 1;
 
-    result1 = OPL_Detect();
+    /*result1 = OPL_Detect();
     result2 = OPL_Detect();
     if (result1 == OPL_INIT_NONE || result2 == OPL_INIT_NONE)
     {
@@ -94,13 +96,13 @@ static opl_init_result_t InitDriver(opl_driver_t *_driver,
         _driver->shutdown_func();
         driver = NULL;
         return OPL_INIT_NONE;
-    }
+    }*/
 
     init_stage_reg_writes = 0;
 
     printf("OPL_Init: Using driver '%s'.\n", driver->name);
 
-    return result2;
+    return OPL_INIT_OPL2;
 }
 
 // Find a driver automatically by trying each in the list.

@@ -1,6 +1,7 @@
 add_library(opl STATIC
             opl_internal.h
             opl.c           opl.h
+	    opl_liboplhw.c
             opl_linux.c
             opl_obsd.c
             opl_queue.c     opl_queue.h
@@ -11,5 +12,6 @@ add_library(opl STATIC
             opl3.c          opl3.h)
 target_include_directories(opl
                            INTERFACE "."
+			   PRIVATE ${OplHW_INCLUDE_DIRS}
                            PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/../")
-target_link_libraries(opl SDL2::mixer)
+target_link_libraries(opl SDL2::mixer OplHW::oplhw)
